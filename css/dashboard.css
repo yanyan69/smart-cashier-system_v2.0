@@ -1,0 +1,16 @@
+/* Dashboard-specific styles */
+.dashboard-widgets {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.widget {
+    background-color: #3d444b;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}

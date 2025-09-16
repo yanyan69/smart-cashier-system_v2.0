@@ -1,9 +1,59 @@
 #guestContent {
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .note {
     font-size: 0.9em;
+    color: #e9ecef;
+}
+
+.company-overview {
+    margin-bottom: 2em;
+}
+
+.company-overview h3 {
+    font-size: 1.5em;
+    margin-top: 1em;
+    color: #fff;
+}
+
+.company-overview p, .company-overview ul {
+    margin-bottom: 1em;
+    color: #e9ecef;
+}
+
+.company-overview ul li {
+    margin-left: 20px;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.team-member {
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.team-member h4 {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.team-member p {
     color: #e9ecef;
 }

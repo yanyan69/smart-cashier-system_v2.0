@@ -10,17 +10,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  secret: 'your_secret_key_here', // Change this
+  secret: process.env.SESSION_SECRET || 'your_secret_key_here',
   resave: false,
   saveUninitialized: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'admin',
-  database: 'cashier_db'
+  host: process.env.MYSQL_HOST || 'localhost',
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || 'admin',
+  database: process.env.MYSQL_DATABASE || 'cashier_db'
 });
 
 connection.connect(err => {
@@ -28,20 +28,20 @@ connection.connect(err => {
   else console.log('Database connected');
 });
 
-// Auth middleware
+// Middleware
 const isLoggedIn = (req, res, next) => {
   if (req.session.user_id) return next();
-  res.status(401).json({ status: 'error', message: 'Unauthorized' });
+  res.redirect('/guest/unauthorized.html');
 };
 
 const isAdmin = (req, res, next) => {
   if (req.session.role === 'admin') return next();
-  res.status(403).json({ status: 'error', message: 'Forbidden: Admin only' });
+  res.redirect('/guest/unauthorized.html');
 };
 
 const isOwner = (req, res, next) => {
   if (req.session.role === 'owner') return next();
-  res.status(403).json({ status: 'error', message: 'Forbidden: Owner only' });
+  res.redirect('/guest/unauthorized.html');
 };
 
 // Auth routes
@@ -87,13 +87,13 @@ app.post('/api/password_reset', (req, res) => {
       if (err) return res.json({ status: 'error', message: 'Error generating token' });
       const transporter = nodemailer.createTransport({
         service: 'gmail',
-        auth: { user: 'your_email@gmail.com', pass: 'your_app_password' }
+        auth: { user: process.env.EMAIL_USER || 'your_email@gmail.com', pass: process.env.EMAIL_PASS || 'your_app_password' }
       });
       const mailOptions = {
-        from: 'your_email@gmail.com',
+        from: process.env.EMAIL_USER || 'your_email@gmail.com',
         to: user.email,
         subject: 'Password Reset',
-        text: `Click to reset: http://localhost:3000/reset_password.html?token=${token}`
+        text: `Click to reset: ${process.env.APP_URL || 'http://localhost'}/guest/reset_password.html?token=${token}`
       };
       transporter.sendMail(mailOptions, (error) => {
         if (error) return res.json({ status: 'error', message: 'Email failed' });
@@ -165,4 +165,4 @@ app.post('/api/users', isAdmin, async (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));

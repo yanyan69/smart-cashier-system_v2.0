@@ -1,0 +1,9 @@
+#guestContent {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.note {
+    font-size: 0.9em;
+    color: #e9ecef;
+}

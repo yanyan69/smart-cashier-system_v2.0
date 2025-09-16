@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/user.css">
+</head>
+<body>
+    <div class="sidebar-container"></div>
+    <div class="container">
+        <header>
+            <h1>Reports</h1>
+        </header>
+        <section>
+            <h2>Generate Report</h2>
+            <form id="reportsForm" class="form-container">
+                <div class="form-group">
+                    <label for="period">Report Period:</label>
+                    <select id="period" name="period" required>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <button type="submit" class="button">Generate Report</button>
+            </form>
+            <h2>Sales Report</h2>
+            <table class="table">
+                <thead>
+                    <tr><th>Period</th><th>Total Sales</th></tr>
+                </thead>
+                <tbody id="reportsTable"></tbody>
+            </table>
+        </section>
+        <footer>
+            <p>&copy; 2025 Techlaro Company</p>
+        </footer>
+    </div>
+    <script src="/js/common.js"></script>
+    <script src="/js/user.js"></script>
+</body>
+</html>

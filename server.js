@@ -284,3 +284,8 @@ app.get('/api/logs', isAdmin, (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));
+
+app.use(express.static(path.join(__dirname, '.'))); // Serves index.html, css/, js/, etc.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+}); // Serves index.html for all routes (SPA-like for guest sections)

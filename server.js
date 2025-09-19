@@ -1,3 +1,6 @@
+require('dotenv').config();
+console.log("Loaded env:", process.env.MYSQL_HOST, process.env.MYSQL_USER, process.env.MYSQL_DATABASE);
+
 const express = require('express');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');

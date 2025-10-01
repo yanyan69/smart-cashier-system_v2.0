@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <input type="text" id="username" name="username" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
                                 <label for="password">Password:</label>
                                 <input type="password" id="password" name="password" required>
                             </div>
@@ -52,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify(data)
                             });
-                            const result = await res.json();
-                            window.displayMessage(result.status === 'success' ? 'User added' : 'Error: ' + result.message, result.status === 'success' ? 'success' : 'danger');
-                            if (result.status === 'success') window.location.reload();
+                            const dataRes = await res.json();
+                            window.displayMessage(dataRes.status === 'success' ? 'User added' : 'Error: ' + dataRes.message, dataRes.status === 'success' ? 'success' : 'danger');
+                            if (dataRes.status === 'success') window.location.reload();
                         });
                     }
                 });
